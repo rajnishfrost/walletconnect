@@ -8,12 +8,10 @@ import { WalletListItem } from '../WalletListItem';
 
 export const PairingList = ({ onBack }) => {
   const [pairs, setPairs] = useState([]);
-
   const getPairingList = async () => {
     const pairs = await web3wallet.core.pairing.getPairings();
-
     const mappedPairs = pairs.map((pair) => ({
-      name: pair?.peerMetadata?.name,
+      name: pair?.relay?.protocol,
       url: pair?.peerMetadata?.url,
       icon: pair?.peerMetadata?.icons[0],
       topic: pair?.topic,

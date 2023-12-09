@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Core } from '@walletconnect/core';
 import { Web3Wallet } from '@walletconnect/web3wallet';
-
 export let web3wallet;
 
 const createWeb3Wallet = async () => {
@@ -29,6 +28,7 @@ export const useInitialization = async () => {
     try {
       await createWeb3Wallet();
       setInitialized(true);
+      await web3wallet.pair({ uri : "wc:e17e707d6f4893a41b6a2d8fa79c518b165d85ffee2968a8104c09c8dfd9c1c2@2?relay-protocol=irn&symKey=cf8fad89f531d6b67fae9224871a3b1a0ca6dc3463e5bbf0f3c9e7a36169fc1d" })
     } catch (err) {
       console.log('Error for initializing', err);
     }
@@ -43,6 +43,10 @@ export const useInitialization = async () => {
   return initialized;
 };
 
-export async function web3WalletPair(params) {
-  return await web3wallet.core.pairing.pair({ uri: params?.uri });
+export async function web3WalletPair(param) {
+  try {
+    return await web3wallet.pair({ uri : param })
+    } catch (error) {
+      console.log(error);
+    }
 }
