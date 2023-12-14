@@ -6,14 +6,13 @@ import { Button } from "../Button";
 import { useWalletContext } from "../../store/wallet/walletContext";
 import PropTypes from 'prop-types';
 
-export const AddWallet = ({handleConnect}) => {
+export const AddWallet = () => {
   const { setVerifiedWallet, setEthAddress } = useWalletContext();
   const [imports, setImport] = useState(false);
   const [mnemonics, setMnemonics] = useState("");
 
   const handleCreateWallet = async () => {
     const wallet = VerifiedWallet.createWallet();
-    handleConnect()
     alert(
       `Wallet Created Successfully, Save this Mnemonoics[${
         wallet._mnemonic().phrase

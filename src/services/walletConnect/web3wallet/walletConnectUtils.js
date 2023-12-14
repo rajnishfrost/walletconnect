@@ -23,16 +23,16 @@ const createWeb3Wallet = async () => {
 // Initialize the Web3Wallet
 export const useInitialization = async () => {
   const [initialized, setInitialized] = useState(false);
-  // const [TU , setTU] = useState({});
+  const [TU , setTU] = useState({});
 
   const onInitialize = useCallback(async () => {
     try {
       await createWeb3Wallet();
       setInitialized(true);
-      // const {topic, uri} = await web3wallet.core.pairing.create();
-      // setTU({topic , uri});
-      // if(!TU)
-      // await web3wallet.core.pairing.pair({ uri })
+      const {topic, uri} = await web3wallet.core.pairing.create();
+      setTU({topic , uri});
+      if(!TU)
+      await web3wallet.core.pairing.pair({ uri })
     } catch (err) {
       console.log('Error for initializing', err);
     }
